@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+  \providecommand\backrefparscanfalse{}
+  \providecommand\backrefparscantrue{}
+  \providecommand\backrefprint{}
+
+\backrefparscanfalse
+\bibitem{opto22_snap_aiv4}
+{Opto 22}, ``Snap-aiv-4: Snap 4-ch -10vdc to +10vdc analog input module.'' \url{https://www.opto22.com/products/snap-aiv-4}, 2025.
+\newblock Accedido el 23 de diciembre de 2025.
+\backrefprint\backrefparscantrue
+
+\backrefparscanfalse
+\bibitem{opto22_snap_aov27}
+{Opto 22}, ``Snap-aov-27: Snap 2-ch -10 to +10vdc bipolar analog voltage output module.'' \url{https://www.opto22.com/products/snap-aov-27}, 2025.
+\newblock Accedido el 23 de diciembre de 2025.
+\backrefprint\backrefparscantrue
+
+\end{thebibliography}

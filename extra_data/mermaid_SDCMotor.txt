@@ -1,0 +1,31 @@
+sequenceDiagram
+    participant Simulink
+    participant SFunc as SDCMotor (S-Function)
+    participant OPTO as OPTO22 Brain
+
+    Simulink->>SFunc: mdlStart()
+    SFunc->>OPTO: OpenEnet("192.168.6.101",2001,...)
+    OPTO-->>SFunc: IsOpenDone() loop hasta OK/Error
+
+    loop Cada Ts
+        Simulink->>SFunc: mdlUpdate()
+        SFunc->>OPTO: SetAnaPtValue(0,u)
+        SFunc->>OPTO: SetAnaPtValue(1,iLoad)
+        OPTO-->>SFunc: status (OK/Error)
+
+        Simulink->>SFunc: mdlOutputs()
+        SFunc->>OPTO: GetAnaPtValue(4)  %% velocidad
+        OPTO-->>SFunc: velocidad
+        SFunc->>OPTO: GetAnaPtValue(6)  %% corriente
+        OPTO-->>SFunc: corriente
+        SFunc-->>Simulink: y=velocidad, z=corriente
+
+        alt Error acumulado > MAX
+            SFunc-->>Simulink: ssSetErrorStatus() -> stop
+        end
+    end
+
+    Simulink->>SFunc: mdlTerminate()
+    SFunc->>OPTO: SetAnaPtValue(0,0.0)
+    SFunc->>OPTO: SetAnaPtValue(1,0.0)
+    SFunc->>OPTO: Close()

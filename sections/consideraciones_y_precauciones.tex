@@ -1,0 +1,33 @@
+
+\subsection{Consideraciones y precauciones hardware}
+
+Cosas de la fuente corriente, máximos, peligros, etc
+
+\subsection{Consideraciones Simulación en Tiempo Real Simulink}
+\label{subsec:simulink_consideraciones}
+
+Cosas para no laguaer, tener los tiempos de muestreo, Ts, no abusar de tantos scopes, PC tiene rendimiento limitado, entre otras cosas, evitar que el usuario manipule el bloque del motor
+
+\subsection{Consideraciones y precauciones módulos opto 22}
+\label{subsec:opto22_consideraciones}
+
+\subsubsection{Módulos de E/S utilizados}
+El banco de pruebas se implementa con módulos SNAP de OPTO22:
+\begin{itemize}
+    \item \textbf{Dual Analog Output \texttt{SNAP-AOV-27}}: 2 canales de \emph{salida analógica de voltaje} bipolar (rango nominal \(-10\) a \(+10\)~VDC). Cada canal puede suministrar solamente \(\pm 5\)~mA de corriente de carga (\emph{no es un driver de potencia}). Ambos canales comparten referencia y \textbf{no están aislados entre sí}, aunque el módulo sí posee aislamiento respecto a otros módulos/dispositivos del rack. \cite{opto22_snap_aov27}
+    \item \textbf{Quad Analog Input \texttt{SNAP-AIV-4}}: 4 canales de \emph{entrada analógica de voltaje}, configurables por canal en \(\pm 10\)~VDC o \(\pm 5\)~VDC. Los canales \textbf{no están aislados entre sí}. \cite{opto22_snap_aiv4}
+\end{itemize}
+
+\subsubsection{Límites eléctricos y protección del hardware OPTO-22}
+Para evitar daños en los módulos y/o en la electrónica asociada, se deben respetar las siguientes restricciones:
+\begin{itemize}
+    \item \textbf{No exceder el rango de salida del \texttt{SNAP-AOV-27}}: asegurar que la señal de comando enviada desde Simulink se mantenga dentro de \([-10, +10]\)~V (idealmente con saturación explícita en el modelo).
+    \item \textbf{No exigir corriente de carga mayor a \(\pm 5\)~mA por canal} en el \texttt{SNAP-AOV-27}. Si se requiere accionar una etapa de potencia, debe usarse un amplificador/buffer externo de alta impedancia de entrada (p.\,ej. etapa de acondicionamiento) para que el módulo no entregue corriente directa a la carga. 
+    \item \textbf{Entradas del \texttt{SNAP-AIV-4}}: garantizar que las señales medidas no superen el rango configurado (\(\pm 10\)~V  por canal).
+    \item \textbf{Referencias/tierras}: dado que los canales no están aislados entre sí (entrada y salida), es crítico compartir referencias de señal de forma consistente y evitar lazos de tierra.
+\end{itemize}
+
+\subsubsection{Conexión de Red}
+Con el fin de minimizar la incertidumbre temporal (\emph{jitter}) y la latencia en el canal de comunicación, se recomienda establecer una conexión \textbf{directa} (Ethernet--RJ45) entre el \emph{Brain} OPTO22 y el computador que ejecuta la simulación. En lo posible, se debe evitar el uso de routers o switches intermedios, ya que introducen colas, procesamiento adicional y potenciales retransmisiones, aumentando la variabilidad del retardo entre paquetes.
+
+Adicionalmente, se sugiere que el computador utilizado para la simulación opere en una red dedicada y, de ser viable, \textbf{sin acceso a Internet} durante la ejecución. Esto reduce tráfico de fondo (actualizaciones, sincronizaciones, servicios en segundo plano) y contribuye a mantener un canal de comunicación más estable, consistente y reproducible para el lazo de control en tiempo real.

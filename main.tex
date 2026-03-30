@@ -1,0 +1,115 @@
+
+% Template:     Informe LaTeX
+% Documento:    Archivo principal
+% Versión:      8.1.6 (12/06/2022)
+% Codificación: UTF-8
+%
+% Autor: Pablo Pizarro R.
+%        pablo@ppizarror.com
+%
+% Manual template: [https://latex.ppizarror.com/informe]
+% Licencia MIT:    [https://opensource.org/licenses/MIT]
+
+% CREACIÓN DEL DOCUMENTO
+\documentclass[
+	spanish, % Idioma: spanish, english, etc.
+	letterpaper, oneside
+]{article}
+
+\usepackage{svg}
+%\usepackage[inkscapelatex=false]{svg}
+
+% INFORMACIÓN DEL DOCUMENTO
+\def\documenttitle {[PENDING-TITLE].}
+\def\documentsubtitle {}
+\def\documentsubject {[NO-CODE] [PENDING-SUBTITLE]}
+
+\def\documentauthor {Diego Peña Loza, Roberto Guajardo M.}
+\def\coursename {Introducción al Procesamiento Digital de Imágenes}
+\def\coursecode {[NO-CODE]}
+
+\def\universityname {Universidad de Chile}
+\def\universityfaculty {Facultad de Ciencias Físicas y Matemáticas}
+\def\universitydepartment {Departamento de Ingeniería Eléctrica}
+\def\universitydepartmentimage {departamentos/die}
+\def\universitydepartmentimagecfg {height=1.57cm}
+\def\universitylocation {Santiago de Chile}
+
+% INTEGRANTES, PROFESORES Y FECHAS
+\def\authortable {
+\begin{tabular}{ll}
+	Integrantes:
+	& \begin{tabular}[t]{l}
+		Diego Peña Loza \\
+        Roberto Guajardo M.
+	\end{tabular} \\
+	Profesor:
+	& \begin{tabular}[t]{l}
+		Constanza Ahumada
+	\end{tabular} \\
+    Encargados de Laboratorio:
+	& \begin{tabular}[t]{l}
+		[PENDING].
+	\end{tabular} \\
+
+	& \\
+    \\
+	\multicolumn{2}{l}{\universitylocation}
+\end{tabular}
+}
+
+% IMPORTACIÓN DEL TEMPLATE
+\input{template}
+
+% INICIO DE PÁGINAS
+\begin{document}
+	
+% PORTADA
+\templatePortrait
+
+% CONFIGURACIÓN DE PÁGINA Y ENCABEZADOS
+\templatePagecfg
+
+% RESUMEN O ABSTRACT
+%\begin{abstractd}
+	%\lipsum[1] % Párrafo ejemplo, se puede borrar
+%\end{abstractd}
+
+% TABLA DE CONTENIDOS - ÍNDICE
+\templateIndex
+
+% CONFIGURACIONES FINALES
+\templateFinalcfg
+
+% ======================= INICIO DEL DOCUMENTO =======================
+
+%\section{Objetivos y tareas a realizar} \label{sec:tareas}
+%\input{sections/tareas}
+
+\newpage
+\input{sections/setup_fisico}
+
+\newpage 
+\section{Código SDCMotor}
+\label{sec:codigo_SDCMotor}
+\input{sections/codigo_SDCMotor}
+
+\newpage
+\section{Consideraciones y Precauciones}
+\label{sec:consideraciones_y_precauciones}
+\input{sections/consideraciones_y_precauciones}
+
+\newpage
+\section{Sensor de corriente}
+\label{sec:sensor_de_corriente}
+\input{sections/sensor_de_corriente}
+
+\newpage
+\section{Carga electronica}
+\label{sec:carga_electronica}
+\input{sections/carga_electronica}
+
+\newpage
+\bibliography{library}
+
+\end{document}
