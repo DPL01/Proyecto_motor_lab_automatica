@@ -1,10 +1,10 @@
-\subsection{Carga electrónica}
-
-En esta sección se explica el diseño y funcionamiento del circuito diseñado para actuar como una carga electrónica controlada por voltaje. El propósito de este circuito, es ofrecer una condición de carga para la armadura del generador de manera que este ejerza un torque al motor DC. Se muestra a continuación el circuito ensamblado.
 
 
+En esta sección se explica el diseño y funcionamiento del circuito diseñado para actuar como una carga electrónica controlada por voltaje. El propósito de este circuito, es ofrecer una condición de carga para la armadura del generador de manera que este ejerza un torque al motor DC, y que, además, esta carga pueda ser controlada desde el computador que está realizando el control del sistema. Se muestra a continuación el circuito ensamblado.
 
-La parte más importante del circuito es el transistor BJT modelo TIP41C, ya que, este componente será el que disipe la mayor parte de la potencia eléctrica generada por el generador, por lo tanto, debe estar montado con un disipador térmico de buen tamaño. Además, se muestra el esquemático de la carga electrónica en la siguiente figura \ref{fig:cargaElec}.
+
+
+Para entender el funcionamiento del circuito, se debe saber que la parte más importante del mismo es el transistor BJT modelo TIP41C, ya que, este componente será el que disipe la mayor parte de la potencia eléctrica generada por el generador, por lo tanto, debe estar montado con un disipador térmico de buen tamaño. Además, se muestra el esquemático de la carga electrónica en la siguiente figura \ref{fig:cargaElec}.
 
 \begin{figure}[H]
     \centering
@@ -17,7 +17,7 @@ Para realizar la función, el circuito se alimenta con 12 Volts, y el transistor
 
 \begin{table}[H]
     \centering
-    \caption{Temperaturas medidas}
+    \caption{Temperaturas medidas (grados Celsius)}
     \begin{tabular}{|c|c|c|c|c|}
         \hline
         V, I & 0.2 A & 0.4 A & 0.6 A &  0.8 A\\

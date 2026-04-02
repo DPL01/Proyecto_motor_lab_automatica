@@ -1,28 +1,16 @@
 
 
-\subsection{Placa de medición de corriente}
-
-Antes de todo, se menciona que los diseños de PCB fueron hecho mediante EasyEDA y la impresión mediante el lab. de electrónica. Para realizar la medición de corriente de armadura del motor, se elaboro una PCB como la que se muestra en la imagen xx,
+Antes de todo, se menciona que los diseños de PCB fueron hecho mediante el software EasyEDA y la impresión de la PCB en las dependencias del lab. de electrónica. Por otra parte, para realizar la medición de corriente de armadura del motor, se elaboro una PCB como la que se muestra en la imagen xx,
 
 
 
-El funcionamiento es el siguiente: la corriente de armadura del motor se mide a través de un sensor LA 55-P, este sensor, entrega una corriente que se transforma a voltaje con una resistencia y se amplifica mediante un circuito de amplificadores operacionales entregando un voltaje a la salida de la PCB, en ocasiones anteriores se necesito un arduino para digitalizar la corriente y comunicarla hacia Simulink, dado esto, fue necesario que la señal entregada por la PCB posea un offset o valor continuo de 2.5 V, y un rango de excursión de 0 a 5 V, lo que es compatible con Arduino. De esta manera, se elaboró el siguiente circuito esquemático (ver fig. \ref{fig:sCorriente}) con amplificadores operaciones para amplificar la señal del sensor y situarla sobre un offset de 2.5 V. En el caso del sistema que usa Opto-22 como adquisidor de datos, no es necesario que exista un offset, sin embargo, este offset se puede revertir en Simulink restandole 2.5 a la señal recibida.
+El funcionamiento es el siguiente: la corriente de armadura del motor se mide a través de un sensor LA 55-P, este sensor, entrega una corriente que se transforma a voltaje con una resistencia y se amplifica mediante un circuito de amplificadores operacionales entregando un voltaje a la salida de la PCB, y posteriormente, este voltaje se digitaliza en el módulo OPTO-22. La siguiente imágen \ref{fig:sCorriente} presenta la el diagrama esquemático completo del circuito.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{img//SensorCorriente/sensorCorriente1.jpg}
     \caption{Acondicionamiento de la señal de corriente}
     \label{fig:sCorriente}
-\end{figure}
-
-
-Adicionalmente, existe un circuito (fig. \ref{fig:sArduino}) con otro amplificador operacional que se encarga de tomar una señal PWM y convertirla a un voltaje continuo además de ser amplificada por una razón de 1.5 aprox., \textbf{Esta sección del circuito NO SE USA para el montaje que utiliza el sistema Opto-22, SOLO SE USA con el montaje que utiliza un arduino como interfaz de comunicación entre el motor y Simulink}.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\linewidth]{img//SensorCorriente/senalArduino.jpg}
-    \caption{Acondicionamiento señal Arduino (sin uso con Opto-22)}
-    \label{fig:sArduino}
 \end{figure}
 
 Por ultimo, para realizar todas las funciones requeridas para acondicionar la señal de corriente, el circuito posee una fuente de alimentación simétrica como se ve en la fig. \ref{fig:fSimetrica}, el valor del voltaje de salida de la fuente es de +-12 Vdc.
@@ -34,11 +22,5 @@ Por ultimo, para realizar todas las funciones requeridas para acondicionar la se
     \label{fig:fSimetrica}
 \end{figure}
 
-Se adjunta una vista general del esquemático fig. \ref{fig:esquematico}.
+Cabe destacar que este módulo se alimenta gracias a un transformador simétrico de 12 Voltios RMS con un tap central, es decir, posee 3 cables de salida. Esto permite alimentar todas las PCB implementadas directamente desde la toma de 220 Voltios AC.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.75\linewidth]{img//SensorCorriente/esquematico.jpg}
-    \caption{Esquemático completo}
-    \label{fig:esquematico}
-\end{figure}
