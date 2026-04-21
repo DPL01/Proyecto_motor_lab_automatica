@@ -1,6 +1,6 @@
 \section{Introducción}
 
-El propósito del presente informe es entregar una guía de apoyo para comprender como se pudo realizar la modificación del montaje del motor de corriente continua. Anteriormente este contaba solamente con un motor de corriente continua y la única variable medida era la velocidad rotacional del eje del motor. Dada la necesidad de implementar un sistema de lazos anidados y además de aplicar una carga mecánica que ejerza torque al motor eléctrico, se implementó un sistema de medición de corriente para poder comunicar la corriente al programa que realiza el control, se acopló mecánicamente un generador eléctrico, y, además, se implementó un módulo de carga electrónica que permite ser controlado desde el computador para consumir mas o menos corriente según lo que se desee.\\
+El propósito del presente informe es entregar una guía de apoyo para comprender como se pudo realizar la modificación del montaje del motor de corriente continua. Anteriormente este contaba solamente con un motor de corriente continua y la única variable medida era la velocidad rotacional del eje del motor. Dada la necesidad de implementar un sistema de lazos anidados y además de aplicar una carga mecánica que ejerza torque al motor eléctrico, se implementó un sistema de medición de corriente para poder comunicar la corriente de armadura que consume el motor DC con el programa que realiza el control, se acopló mecánicamente un generador eléctrico, y, además, se implementó un módulo de carga electrónica que permite ser controlado desde el computador para consumir mas o menos corriente según lo que se desee.\\
 
 En las siguientes secciones se deescribirá en detalle como se conforma el sistema completo, tanto a nivel físico como computacional, y también, como se implementaron todas las adiciones.\\
 
@@ -16,8 +16,18 @@ Sin la ayuda y confianza de los y las mencionado/as, no hubiese sido posible ava
 
 \section{Setup físico}
 
+A continuación, se dará una breve descripción de como se conectan todos lo módulos del setup, utilizando como apoyo diagramas de bloque.
+
 \subsection{Descripción del setup físico}
 
+El setup físico consta de un motor eléctrico acoplado mecánicamente a un generador eléctrico. Ambos son máquinas de corriente continua con una 2 terminales para la excitación de campo, y 2 para el acceso a la armadura. Para poder controlar el motor eléctrico, se utiliza un ordenador con un sistema operativo Windows y con el software Simulink de la familia de Matlab. Este software permite aplicar las estrategias de control para las máquinas. Para poder comunicar el software del ordenador con el motor eléctrico, se utiliza un módulo comercial llamado OPTO-22, este módulo crea una comunicación mediante protocolo Ethernet formando una red directa desde el ordenador hacia el módulo OPTO-22, de estaf forma, el ordenador y el módulo OPTO-22 están literalmente conectados por un cable Ethernet directo entre sí. La siguiente figura  \ref{fig:esquema} muestra un diagrama global del setup.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img//setupFisico/diagramaGlobal.jpg}
+    \caption{Esquema completo del sistema}
+    \label{fig:esquema}
+\end{figure}
 
 
 \subsection{Componentes del setup}
