@@ -1,0 +1,175 @@
+\subsection{Diagrama de bloques de la solución}
+
+A continuacion, se muestra un diagrama de todos los bloques funcionales del dispositivo desarrollado (ver Figura \ref{fig:dSol})
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img//solucion/diagramaSol.jpg}
+    \caption{Diagrama de bloques general de la solucion}
+    \label{fig:dSol}
+\end{figure}
+
+Para este y los siguientes diagramas de bloques, aquellos bloques que tengan un color rojo corresponderan a un terminal por el cual circula una potencia considerable, mientras que para los de color azul, se les cataloga como terminales de señal y corriente despreciable, siendo terminales de entradas o salidas de señales analógicas.
+
+\subsection{PCB Sensor de corriente}
+
+Antes de todo, se menciona que los diseños de PCB fueron hechos mediante el software EasyEDA y la impresión de las PCBs en las dependencias del lab. de electrónica. Por otra parte, para realizar la medición de corriente de armadura del motor, se elaboró una PCB como la que se muestra en la Figura xx,
+
+
+Ahora, para explicar como funciona esta placa electronica, se presenta a continuacion (ver Figura \ref{fig:dCorriente}) el siguiente diagrama de bloques que explica cada circuito funcional de la placa electronica.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img//solucion/diagramaCorriente.jpg}
+    \caption{Diagrama de bloques de la placa del sensor de corriente}
+    \label{fig:dCorriente}
+\end{figure}
+
+La siguiente Figura \ref{fig:sCorriente} presenta la el diagrama esquemático completo del circuito. En cuanto al funcionamiento se describe asi: la corriente de armadura del motor se mide a través de un sensor LA 55-P, este sensor se aprecia en la Figura \ref{fig:sensor}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{img//solucion/sensor.jpg}
+    \caption{Sensor LA 55-P}
+    \label{fig:sensor}
+\end{figure}
+
+Para realizar su función, se atraviesa el cable cuya corriente va a ser medida por la abertura cuadrada que posee el sensor, de esta manera, el dispositivo entrega una corriente que se transforma a voltaje con una resistencia (R3 en el esquemático) y se amplifica mediante un circuito de amplificadores operacionales entregando un voltaje a la salida de la PCB (designado como 'SalidaSensorCorriente'). 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img//solucion/sensorCorriente1.jpg}
+    \caption{Acondicionamiento de la señal de corriente}
+    \label{fig:sCorriente}
+\end{figure}
+
+Dicho voltaje de salida  es una funcion de la corriente que respeta la siguiente ecuacion \ref{eq:Vsalida}
+
+\begin{equation}
+	V_{salidaSensorCorriente} = (1+\frac{R10+R2}{R1}) I_{generador}' K
+	\label{eq:Vsalida}
+\end{equation}
+
+Donde las resistencias R2 y R1 son fijas, mientras que R10 es variable y permite ajustar la ganancia de amplificacion, por otro lado, K es una constante de transformacion que depende del sensor LA 55-P y que es desconocida, pero que gracias a la resistencia variable R10, es posible compensarla para que la señal $V_{salidaSensorCorriente}$ posea valores de amplitud entre 0 y 5 V en conjunto con la actuacion del limitador de corriente que no permite que la señal $V_{salidaSensorCorriente}$ sobrepase los 5 V pudiendo dañar las siguientes etapas.\\
+
+%conexion a opto 22 puerto
+En cuanto a la conexión con el módulo Ethernet OPTO-22, esta señal de 2 cables (Señal y GND) se conecta a las borneras externas del módulo de entradas analógicas SNAP-AIV-4 (Modulo del OPTO-22)como se muestra a continuación (Figura \ref{fig:snapAivP}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img//solucion/conexionOPTO22.jpg}
+    \caption{Conexion de la señal de corriente al OPTO-22}
+    \label{fig:snapAivP}
+\end{figure}
+
+La siguiente Figura \ref{fig:snapAivR} muestra la conexion fisica.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{img//solucion/conexionOPTO22R.jpg}
+    \caption{Conexion de la señal de corriente al OPTO-22 real}
+    \label{fig:snapAivR}
+\end{figure}
+
+%recuperacion en simulink 
+
+Hecho esto, la señal es digitalizada dentro del modulo OPTO-22 y enviada a Simulink mediante protocolo Ethernet, en el computador es recuperada en el programa Simulink mediane el bloque S-Function 'SDCMotor' explicado en las secciones anteriores que entrega la señal como una salida en formato single (variable float de 32 bits). Para que la señal represente el valor de la corriente real de la armadura del motor, se le aplica un bloque de ganancia a la salida de la S-Function como se muestra a continuación (Figura \ref{fig:corrienteSimulink}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\linewidth]{img//solucion/CorrienteSimulinkSDCMotor.jpg}
+    \caption{Recepecion de la corriente en Simulink}
+    \label{fig:corrienteSimulink}
+\end{figure}
+
+En la Figura \ref{fig:corrienteSimulink} se aprecia que la ganancia esta establescida en 3, sin embargo, esta ganancia se debe calibrar mediante mediciones con una fuente de corriente controlada aplicada a la entrada del sensor de corriente. A priori, analiticamente esta ganancia de compensacion deberia seguir la siguiente ecuacion.
+
+\begin{equation}
+	K_{Compensacion} = \frac{1}{(1+\frac{R10+R2}{R1}) K}
+	\label{eq:Kcompensacion}
+\end{equation}
+
+Donde K es la ganancia del sensor mencionada anteriormente y debe ser determinada mediante colocar una corriente en la entrada del sensor y observar el valor medido en Simulink para realizar el despeje.\\
+
+Por ultimo, para realizar todas las funciones requeridas para acondicionar la señal de corriente, el circuito requiere de una fuente de alimentación simétrica como se ve en la fig. \ref{fig:fSimetrica}, el valor del voltaje de salida de la fuente es de +-12 Vdc.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img//solucion/fuenteSim.jpg}
+    \caption{Fuente simétrica}
+    \label{fig:fSimetrica}
+\end{figure}
+
+
+\subsection{PCB Carga Electrónica}
+
+En esta sección se explica el diseño y funcionamiento del circuito diseñado para actuar como una carga electrónica controlada por voltaje. El propósito de este circuito, es ofrecer una condición de carga para la armadura del generador de manera que este ejerza un torque al motor DC, y que, además, esta carga pueda ser controlada desde el computador que está realizando el control del sistema. Se muestra a continuación el circuito ensamblado.
+
+
+
+Al igual que para el sensor de corriente, se presenta un diagrama de bloques de la estructura funcional de este circuito (Figura \ref{fig:dCarga}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img//solucion/diagramaCargaElec.jpg}
+    \caption{Diagrama de bloques de la carga electronica}
+    \label{fig:dCarga}
+\end{figure}
+
+Para entender el funcionamiento del circuito, se debe saber que la parte más importante del mismo es el transistor BJT modelo TIP41C, ya que, este componente será el que disipe la mayor parte de la potencia eléctrica generada por el generador, por lo tanto, debe estar montado con un disipador térmico de buen tamaño. Además, se muestra el esquemático de la carga electrónica en la siguiente Figura \ref{fig:cargaElec}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img//solucion/cargaElec.jpg}
+    \caption{Esquemático carga electrónica}
+    \label{fig:cargaElec}
+\end{figure}
+
+Para realizar la función, el circuito se alimenta con 12 Volts, y el transistor se alimenta directamente de la armadura del motor, para el control de la corriente, el módulo recibe un voltaje de entrada. Este voltaje de entrada es aplicado al Opamp (amplificador operacional), y este a su vez, lo aplica sobre la resistencia R3 del esquemático de la Figura \ref{fig:cargaElec}. De esta manera, se produce una corriente igual a $\frac{Vcontrol}{R3}$. Se utiliza una resistencia R3=1 para tener un control directo de la corriente con iLoad=Vcontrol, ademas, el transistor TIP41C es el encargado de proveer toda la corriente que pasa por la resistencia, por ende, el opamp termina siendo un controlador que no disipa mucha potencia (es importante que sea el modelo LM358). Por ultimo, la carga cuenta con 2 protecciones, 1) Un par de diodos D2 y D1 en la parte superior que impiden que se queme el transistor si es que se conecta en polaridad inversa la carga. 2) el Opamp 1.1 que impide que el voltaje Vcontrol aplicado a la resistencia R3 sea muy grande evitando que la carga pida mucha corriente, el valor de limite de corriente se puede ajustar de forma manual con el potenciómetro R7. Para garantizar un buen desempeño, se realizó una serie de pruebas a distintos voltajes y corrientes un con sensor de temperatura en el disipador para monitorear la temperatura del transistor TIP41C. Ver la tabla \ref{tab:datos}. \\
+
+\textbf{Datos de la prueba}:
+\begin{itemize}
+	\item Tiempo de funcionamiento: 1 minuto
+	\item Temperatura ambiente: 28 grados celsius.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \caption{Temperaturas medidas (grados Celsius)}
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        V, I & 0.2 A & 0.4 A & 0.6 A &  0.8 A\\
+        \hline
+        5 V & 28 & 29 & 31 & 30 \\
+        \hline
+        9 V & 29 & 31 & 33 & 34 \\
+        \hline
+        12 V & 32 & 33 & 38 & 37 \\
+        \hline
+    \end{tabular}
+    \label{tab:datos}
+\end{table}
+
+Para realizar la conexion al modulo OPTO-22, se sigue el siguiente diagrama de conexion.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{img//solucion/conexionOPTO22Carga.jpg}
+    \caption{Conexion de la señal de carga al OPTO-22}
+    \label{fig:snapAivCarga}
+\end{figure}
+
+y fisicamente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{img//solucion/conexionOPTO22RCarga.jpg}
+    \caption{Conexion de la señal de carga al OPTO-22 real}
+    \label{fig:snapAivRCarga}
+\end{figure}
+
+
+
+\subsection{Alimentacion}
+
+De manera aclaratoria, como se vio en la Figura \ref{fig:dSol}, el dispositivo se alimenta directamente de la toma de 220 Vac de la red. Esto gracias a la fuente interna que posee mas el transformador.\\
