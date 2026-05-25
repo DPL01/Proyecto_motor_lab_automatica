@@ -1,22 +1,21 @@
 \subsection{Diagrama de bloques de la solución}
 
-A continuacion, se muestra un diagrama de todos los bloques funcionales del dispositivo desarrollado (ver Figura \ref{fig:dSol})
+A continuación, se muestra un diagrama con los bloques funcionales del dispositivo desarrollado (ver Figura \ref{fig:dSol}).
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{img//solucion/diagramaSol.jpg}
-    \caption{Diagrama de bloques general de la solucion}
+    \caption{Diagrama de bloques general de la solución}
     \label{fig:dSol}
 \end{figure}
 
-Para este y los siguientes diagramas de bloques, aquellos bloques que tengan un color rojo corresponderan a un terminal por el cual circula una potencia considerable, mientras que para los de color azul, se les cataloga como terminales de señal y corriente despreciable, siendo terminales de entradas o salidas de señales analógicas.
+En este y en los siguientes diagramas de bloques, los bloques de color rojo corresponden a terminales por los cuales circula una potencia considerable. En cambio, los bloques de color azul representan terminales de señal, asociados a entradas o salidas analógicas de baja corriente.
 
-\subsection{PCB Sensor de corriente}
+\subsection{PCB sensor de corriente}
 
-Antes de todo, se menciona que los diseños de PCB fueron hechos mediante el software EasyEDA y la impresión de las PCBs en las dependencias del lab. de electrónica. Por otra parte, para realizar la medición de corriente de armadura del motor, se elaboró una PCB como la que se muestra en la Figura xx,
+Los diseños de PCB fueron realizados mediante el software EasyEDA y la fabricación de las placas se llevó a cabo en las dependencias del laboratorio de electrónica. Para medir la corriente de armadura del motor, se elaboró una PCB dedicada al acondicionamiento de la señal entregada por el sensor de corriente.
 
-
-Ahora, para explicar como funciona esta placa electronica, se presenta a continuacion (ver Figura \ref{fig:dCorriente}) el siguiente diagrama de bloques que explica cada circuito funcional de la placa electronica.
+Para explicar el funcionamiento de esta placa electrónica, la Figura \ref{fig:dCorriente} presenta un diagrama de bloques con los circuitos funcionales que la componen.
 
 \begin{figure}[H]
     \centering
@@ -25,7 +24,7 @@ Ahora, para explicar como funciona esta placa electronica, se presenta a continu
     \label{fig:dCorriente}
 \end{figure}
 
-La siguiente Figura \ref{fig:sCorriente} presenta la el diagrama esquemático completo del circuito. En cuanto al funcionamiento se describe asi: la corriente de armadura del motor se mide a través de un sensor LA 55-P, este sensor se aprecia en la Figura \ref{fig:sensor}.
+La Figura \ref{fig:sCorriente} presenta el diagrama esquemático completo del circuito. La corriente de armadura del motor se mide mediante un sensor LA 55-P, mostrado en la Figura \ref{fig:sensor}.
 
 \begin{figure}[H]
     \centering
@@ -34,7 +33,7 @@ La siguiente Figura \ref{fig:sCorriente} presenta la el diagrama esquemático co
     \label{fig:sensor}
 \end{figure}
 
-Para realizar su función, se atraviesa el cable cuya corriente va a ser medida por la abertura cuadrada que posee el sensor, de esta manera, el dispositivo entrega una corriente que se transforma a voltaje con una resistencia (R3 en el esquemático) y se amplifica mediante un circuito de amplificadores operacionales entregando un voltaje a la salida de la PCB (designado como 'SalidaSensorCorriente'). 
+Para realizar la medición, el cable cuya corriente se desea medir atraviesa la abertura cuadrada del sensor. De esta manera, el dispositivo entrega una corriente proporcional, la cual se transforma en voltaje mediante una resistencia (R3 en el esquemático). Posteriormente, esta señal se amplifica mediante un circuito con amplificadores operacionales, obteniéndose un voltaje de salida de la PCB designado como \texttt{SalidaSensorCorriente}. 
 
 \begin{figure}[H]
     \centering
@@ -43,14 +42,14 @@ Para realizar su función, se atraviesa el cable cuya corriente va a ser medida 
     \label{fig:sCorriente}
 \end{figure}
 
-Dicho voltaje de salida  es una funcion de la corriente que respeta la siguiente ecuacion \ref{eq:Vsalida}
+Dicho voltaje de salida es una función de la corriente medida y sigue la relación indicada en la Ecuación \ref{eq:Vsalida}.
 
 \begin{equation}
-	V_{salidaSensorCorriente} = (1+\frac{R10+R2}{R1}) I_{generador}' K
+	V_{salidaSensorCorriente} = (1+\frac{R10+R2}{R1}) I_{armadura}' K
 	\label{eq:Vsalida}
 \end{equation}
 
-Donde las resistencias R2 y R1 son fijas, mientras que R10 es variable y permite ajustar la ganancia de amplificacion, por otro lado, K es una constante de transformacion que depende del sensor LA 55-P y que es desconocida, pero que gracias a la resistencia variable R10, es posible compensarla para que la señal $V_{salidaSensorCorriente}$ posea valores de amplitud entre 0 y 5 V en conjunto con la actuacion del limitador de corriente que no permite que la señal $V_{salidaSensorCorriente}$ sobrepase los 5 V pudiendo dañar las siguientes etapas.\\
+Donde las resistencias R2 y R1 son fijas, mientras que R10 es variable y permite ajustar la ganancia de amplificacion, por otro lado, $K$ es una constante de transformacion que depende del sensor LA 55-P y que es desconocida, pero que gracias a la resistencia variable R10, es posible compensarla para que la señal $V_{salidaSensorCorriente}$ posea valores de amplitud entre 0 y 5 V en conjunto con la actuacion del limitador de corriente que no permite que la señal $V_{salidaSensorCorriente}$ sobrepase los 5 V pudiendo dañar las siguientes etapas.\\
 
 %conexion a opto 22 puerto
 En cuanto a la conexión con el módulo Ethernet OPTO-22, esta señal de 2 cables (Señal y GND) se conecta a las borneras externas del módulo de entradas analógicas SNAP-AIV-4 (Modulo del OPTO-22)como se muestra a continuación (Figura \ref{fig:snapAivP}).
@@ -58,40 +57,40 @@ En cuanto a la conexión con el módulo Ethernet OPTO-22, esta señal de 2 cable
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\linewidth]{img//solucion/conexionOPTO22.jpg}
-    \caption{Conexion de la señal de corriente al OPTO-22}
+    \caption{Conexión de la señal de corriente al OPTO-22}
     \label{fig:snapAivP}
 \end{figure}
 
-La siguiente Figura \ref{fig:snapAivR} muestra la conexion fisica.
+La Figura \ref{fig:snapAivR} muestra la conexión física correspondiente.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\linewidth]{img//solucion/conexionOPTO22R.jpg}
-    \caption{Conexion de la señal de corriente al OPTO-22 real}
+    \caption{Conexión física de la señal de corriente al OPTO-22}
     \label{fig:snapAivR}
 \end{figure}
 
 %recuperacion en simulink 
 
-Hecho esto, la señal es digitalizada dentro del modulo OPTO-22 y enviada a Simulink mediante protocolo Ethernet, en el computador es recuperada en el programa Simulink mediane el bloque S-Function 'SDCMotor' explicado en las secciones anteriores que entrega la señal como una salida en formato single (variable float de 32 bits). Para que la señal represente el valor de la corriente real de la armadura del motor, se le aplica un bloque de ganancia a la salida de la S-Function como se muestra a continuación (Figura \ref{fig:corrienteSimulink}).
+Hecho esto, la señal es digitalizada dentro del módulo OPTO-22 y enviada a Simulink mediante protocolo Ethernet. En el computador, la señal es recuperada mediante el bloque S-Function \texttt{SDCMotor}, explicado en las secciones anteriores, el cual entrega la medición como una salida en formato \emph{single} (variable \texttt{float} de 32 bits). Para que la señal represente el valor real de la corriente de armadura del motor, se aplica un bloque de ganancia a la salida de la S-Function, como se muestra en la Figura \ref{fig:corrienteSimulink}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.4\linewidth]{img//solucion/CorrienteSimulinkSDCMotor.jpg}
-    \caption{Recepecion de la corriente en Simulink}
+    \caption{Recepción de la corriente en Simulink}
     \label{fig:corrienteSimulink}
 \end{figure}
 
-En la Figura \ref{fig:corrienteSimulink} se aprecia que la ganancia esta establescida en 3, sin embargo, esta ganancia se debe calibrar mediante mediciones con una fuente de corriente controlada aplicada a la entrada del sensor de corriente. A priori, analiticamente esta ganancia de compensacion deberia seguir la siguiente ecuacion.
+En la Figura \ref{fig:corrienteSimulink} se aprecia que la ganancia está establecida en 3. Sin embargo, este valor debe calibrarse mediante mediciones con una fuente de corriente controlada aplicada a la entrada del sensor de corriente. A priori, la ganancia de compensación debería seguir la relación indicada en la Ecuación \ref{eq:Kcompensacion}.
 
 \begin{equation}
 	K_{Compensacion} = \frac{1}{(1+\frac{R10+R2}{R1}) K}
 	\label{eq:Kcompensacion}
 \end{equation}
 
-Donde K es la ganancia del sensor mencionada anteriormente y debe ser determinada mediante colocar una corriente en la entrada del sensor y observar el valor medido en Simulink para realizar el despeje.\\
+Donde \(K\) es la ganancia del sensor mencionada anteriormente. Este valor debe determinarse aplicando una corriente conocida en la entrada del sensor y observando el valor medido en Simulink para realizar el despeje correspondiente.\\
 
-Por ultimo, para realizar todas las funciones requeridas para acondicionar la señal de corriente, el circuito requiere de una fuente de alimentación simétrica como se ve en la fig. \ref{fig:fSimetrica}, el valor del voltaje de salida de la fuente es de +-12 Vdc.
+Por último, para realizar las funciones de acondicionamiento de la señal de corriente, el circuito requiere una fuente de alimentación simétrica, como se muestra en la Figura \ref{fig:fSimetrica}. El voltaje de salida de la fuente es de \(\pm 12\) VDC.
 
 \begin{figure}[H]
     \centering
@@ -101,9 +100,9 @@ Por ultimo, para realizar todas las funciones requeridas para acondicionar la se
 \end{figure}
 
 
-\subsection{PCB Carga Electrónica}
+\subsection{PCB carga electrónica}
 
-En esta sección se explica el diseño y funcionamiento del circuito diseñado para actuar como una carga electrónica controlada por voltaje. El propósito de este circuito, es ofrecer una condición de carga para la armadura del generador de manera que este ejerza un torque al motor DC, y que, además, esta carga pueda ser controlada desde el computador que está realizando el control del sistema. Se muestra a continuación el circuito ensamblado.
+En esta sección se explica el diseño y funcionamiento del circuito implementado como carga electrónica controlada por voltaje. El propósito de este circuito es ofrecer una condición de carga para la armadura del generador, de modo que este ejerza un torque sobre el motor DC. Además, la carga puede ser controlada desde el computador que ejecuta el sistema de control.
 
 
 
@@ -112,11 +111,11 @@ Al igual que para el sensor de corriente, se presenta un diagrama de bloques de 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{img//solucion/diagramaCargaElec.jpg}
-    \caption{Diagrama de bloques de la carga electronica}
+    \caption{Diagrama de bloques de la carga electrónica}
     \label{fig:dCarga}
 \end{figure}
 
-Para entender el funcionamiento del circuito, se debe saber que la parte más importante del mismo es el transistor BJT modelo TIP41C, ya que, este componente será el que disipe la mayor parte de la potencia eléctrica generada por el generador, por lo tanto, debe estar montado con un disipador térmico de buen tamaño. Además, se muestra el esquemático de la carga electrónica en la siguiente Figura \ref{fig:cargaElec}.
+Para entender el funcionamiento del circuito, se debe considerar que el componente principal es el transistor BJT TIP41C. Este componente disipa la mayor parte de la potencia eléctrica generada por el generador, por lo que debe montarse sobre un disipador térmico adecuado. El esquemático de la carga electrónica se muestra en la Figura \ref{fig:cargaElec}.
 
 \begin{figure}[H]
     \centering
@@ -125,12 +124,18 @@ Para entender el funcionamiento del circuito, se debe saber que la parte más im
     \label{fig:cargaElec}
 \end{figure}
 
-Para realizar la función, el circuito se alimenta con 12 Volts, y el transistor se alimenta directamente de la armadura del motor, para el control de la corriente, el módulo recibe un voltaje de entrada. Este voltaje de entrada es aplicado al Opamp (amplificador operacional), y este a su vez, lo aplica sobre la resistencia R3 del esquemático de la Figura \ref{fig:cargaElec}. De esta manera, se produce una corriente igual a $\frac{Vcontrol}{R3}$. Se utiliza una resistencia R3=1 para tener un control directo de la corriente con iLoad=Vcontrol, ademas, el transistor TIP41C es el encargado de proveer toda la corriente que pasa por la resistencia, por ende, el opamp termina siendo un controlador que no disipa mucha potencia (es importante que sea el modelo LM358). Por ultimo, la carga cuenta con 2 protecciones, 1) Un par de diodos D2 y D1 en la parte superior que impiden que se queme el transistor si es que se conecta en polaridad inversa la carga. 2) el Opamp 1.1 que impide que el voltaje Vcontrol aplicado a la resistencia R3 sea muy grande evitando que la carga pida mucha corriente, el valor de limite de corriente se puede ajustar de forma manual con el potenciómetro R7. Para garantizar un buen desempeño, se realizó una serie de pruebas a distintos voltajes y corrientes un con sensor de temperatura en el disipador para monitorear la temperatura del transistor TIP41C. Ver la tabla \ref{tab:datos}. \\
+El circuito se alimenta con 12 V y el transistor se conecta a la armadura del generador. Para controlar la corriente, el módulo recibe un voltaje de entrada denominado \(V_{control}\). Este voltaje se aplica al amplificador operacional, el cual actúa sobre la resistencia R3 indicada en el esquemático de la Figura \ref{fig:cargaElec}. De esta manera, se produce una corriente aproximada igual a \(\frac{V_{control}}{R3}\).
+
+Se utiliza una resistencia \(R3 = 1~\Omega\) para obtener una relación directa entre el voltaje de control y la corriente de carga, es decir, \(iLoad \approx V_{control}\). El transistor TIP41C es el encargado de conducir la corriente que circula por la resistencia, mientras que el amplificador operacional actúa como controlador y no disipa una potencia significativa. En esta implementación es importante utilizar el modelo LM358.
+
+La carga cuenta con dos protecciones principales. En primer lugar, los diodos D2 y D1 evitan daños en el transistor ante una conexión de polaridad inversa. En segundo lugar, el amplificador operacional 1.1 limita el voltaje aplicado sobre la resistencia R3, evitando que la carga solicite una corriente excesiva. El límite de corriente puede ajustarse manualmente mediante el potenciómetro R7.
+
+Para evaluar el desempeño térmico inicial, se realizaron pruebas a distintos voltajes y corrientes, utilizando un sensor de temperatura en el disipador para monitorear la temperatura del transistor TIP41C. Los resultados se presentan en la Tabla \ref{tab:datos}. \\
 
 \textbf{Datos de la prueba}:
 \begin{itemize}
 	\item Tiempo de funcionamiento: 1 minuto
-	\item Temperatura ambiente: 28 grados celsius.
+	\item Temperatura ambiente: 28 grados Celsius.
 \end{itemize}
 
 \begin{table}[H]
@@ -150,26 +155,26 @@ Para realizar la función, el circuito se alimenta con 12 Volts, y el transistor
     \label{tab:datos}
 \end{table}
 
-Para realizar la conexion al modulo OPTO-22, se sigue el siguiente diagrama de conexion.
+Para realizar la conexión al módulo OPTO-22, se sigue el diagrama mostrado en la Figura \ref{fig:snapAivCarga}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\linewidth]{img//solucion/conexionOPTO22Carga.jpg}
-    \caption{Conexion de la señal de carga al OPTO-22}
+    \caption{Conexión de la señal de carga al OPTO-22}
     \label{fig:snapAivCarga}
 \end{figure}
 
-y fisicamente.
+La conexión física correspondiente se muestra en la Figura \ref{fig:snapAivRCarga}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\linewidth]{img//solucion/conexionOPTO22RCarga.jpg}
-    \caption{Conexion de la señal de carga al OPTO-22 real}
+    \caption{Conexión física de la señal de carga al OPTO-22}
     \label{fig:snapAivRCarga}
 \end{figure}
 
 
 
-\subsection{Alimentacion}
+\subsection{Alimentación}
 
-De manera aclaratoria, como se vio en la Figura \ref{fig:dSol}, el dispositivo se alimenta directamente de la toma de 220 Vac de la red. Esto gracias a la fuente interna que posee mas el transformador.\\
+Como se observa en la Figura \ref{fig:dSol}, el dispositivo se alimenta directamente desde la red de 220 VAC. Esta alimentación se adapta mediante la fuente interna y el transformador incorporado en el sistema.\\

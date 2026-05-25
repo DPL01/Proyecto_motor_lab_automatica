@@ -6,29 +6,55 @@ En las siguientes secciones se deescribirá en detalle como se conforma el siste
 
 \section{Setup físico}
 
-A continuación, se dará una breve descripción de como se conectan todos lo módulos del setup, utilizando como apoyo diagramas de bloque.
+A continuación, se presenta una descripción general de la conexión entre los módulos del setup, utilizando diagramas de bloques como apoyo.
 
 \subsection{Descripción del setup físico}
 
-El setup físico consta de un motor eléctrico acoplado mecánicamente a un generador eléctrico. Ambos son máquinas de corriente continua con 2 terminales para la excitación de campo, y 2 para el acceso a la armadura. Para poder controlar el motor eléctrico, se utiliza un ordenador con un sistema operativo Windows y con el software Simulink de la familia de Matlab. Este software permite aplicar las estrategias de control para las máquinas. Para poder comunicar el software del ordenador con el motor eléctrico, se utiliza un módulo comercial llamado OPTO-22. Este módulo crea una comunicación mediante protocolo Ethernet formando una red directa desde el ordenador hacia el módulo OPTO-22. De esta forma, el ordenador y el módulo OPTO-22 están conectados por un cable Ethernet directo entre sí. La siguiente figura  \ref{fig:esquema} muestra un diagrama global del setup.
+El setup físico consta de un motor eléctrico acoplado mecánicamente a un generador eléctrico. Ambos son máquinas de corriente continua con dos terminales para la excitación de campo y dos terminales para el acceso a la armadura. Para controlar el motor eléctrico, se utiliza un computador con sistema operativo Windows y el software Simulink, perteneciente a la familia de MATLAB. Este software permite implementar las estrategias de control aplicadas a las máquinas.
+
+La comunicación entre el computador y el sistema físico se realiza mediante un módulo comercial OPTO-22. Este módulo establece una comunicación por protocolo Ethernet, formando una red directa entre el computador y el OPTO-22 mediante un cable Ethernet. La Figura \ref{fig:esquema} muestra un diagrama global del setup.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\linewidth]{img//setupFisico/diagramaGlobal.jpg}
+    \includegraphics[width=0.75\linewidth]{img/diagramaGlobal.jpg}
     \caption{Esquema completo del sistema}
     \label{fig:esquema}
 \end{figure}
 
 \subsection{Componentes del setup}
 
-\subsubsection{Opto-22}
+El sistema implementado está compuesto por distintos módulos electrónicos y computacionales que permiten realizar el control, la adquisición de datos y la aplicación de carga sobre la máquina de corriente continua. Cada componente cumple una función específica dentro del lazo de control y adquisición del sistema. A continuación, se describe el propósito y funcionamiento general de cada uno de ellos.
+
+\subsubsection{Módulo OPTO-22}
+
+El módulo OPTO-22 corresponde a la interfaz principal entre el computador y el sistema físico. 
+Este dispositivo permite adquirir señales analógicas provenientes de sensores y, además, 
+generar señales analógicas de control hacia los actuadores del sistema.
+
+La comunicación entre el computador y el módulo OPTO-22 se realiza mediante protocolo Ethernet, 
+estableciendo una red directa entre ambos dispositivos. Desde Simulink se envían comandos de voltaje hacia el motor y la carga electrónica, 
+mientras que el OPTO-22 retorna las mediciones de velocidad y corriente para ser utilizadas posteriormentepor los algoritmos de control.
+
+En la implementación actual se utilizan los módulos SNAP-AOV-27 para las salidas analógicas y SNAP-AIV-4 para las entradas analógicas.
 
 \subsubsection{Sensor de velocidad}
 
+La velocidad angular del motor se mide mediante un sensor de velocidad basado en un encoder acoplado mecánicamente al eje del motor. 
+La señal generada por este sensor es acondicionada y posteriormente enviada al módulo OPTO-22 para ser digitalizada y procesada en Simulink.
+
 \subsubsection{Sensor de corriente}
 
-\subsubsection{Controlador de velocidad}
+Con el fin de medir la corriente de armadura consumida por el motor, se implementó una PCB dedicada basada en el sensor LA 55-P. 
+Este sensor permite realizar mediciones de corriente con aislamiento eléctrico y sin intervenir directamente el circuito de potencia.
+
+La señal entregada por el sensor es acondicionada mediante amplificadores operacionales y circuitos limitadores para obtener un rango compatible con las entradas analógicas del OPTO-22. \\
+
+Nota: El módulo de medición de corriente también puede utilizarse para otros tipos de mediciones, por ejemplo, la corriente de campo del motor.
 
 \subsubsection{Carga electrónica}
+La carga electrónica fue diseñada con el propósito de aplicar una carga variable sobre el generador DC acoplado mecánicamente al motor. 
+Esto permite simular distintas condiciones de carga y evaluar el comportamiento dinámico del sistema bajo diferentes exigencias. \\
 
+La carga es controlada mediante una señal analógica proveniente del OPTO-22, permitiendo variar la corriente consumida por el circuito de potencia.
+Internamente, la etapa de disipación utiliza un transistor TIP41C montado sobre un disipador térmico.
 

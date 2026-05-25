@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.6.4)  30 MAR 2026 00:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex 2025.6.4)  24 MAY 2026 23:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -2381,20 +2381,20 @@ LaTeX Info: Redefining \% on input line 1.
 \tf@toc=\write4
 \openout4 = `main.toc'.
 
- (./main.lof
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
 
 
-LaTeX Info: Redefining \. on input line 3.
-LaTeX Info: Redefining \% on input line 3.
+LaTeX Info: Redefining \. on input line 79.
+LaTeX Info: Redefining \% on input line 79.
 Package babel Info: 'spanish' activates 'spanish' shorthands.
-(babel)             Reported  on input line 3.
+(babel)             Reported  on input line 79.
 [1
 
 
 
-])
+] (./main.lof
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
 \tf@lof=\write5
 \openout5 = `main.lof'.
 
@@ -2409,13 +2409,27 @@ LaTeX Info: Redefining \% on input line 1.
 
 LaTeX Info: Redefining \. on input line 82.
 LaTeX Info: Redefining \% on input line 82.
-[2] (./sections/setup_fisico.tex)
+[2] (./sections/setup_fisico.tex
+<img/diagramaGlobal.jpg, id=151, 602.25pt x 379.4175pt>
+File: img/diagramaGlobal.jpg Graphic file (type jpg)
+<use img/diagramaGlobal.jpg>
+Package pdftex.def Info: img/diagramaGlobal.jpg  used on input line 19.
+(pdftex.def)             Requested size: 352.31653pt x 221.96703pt.
 
-LaTeX Info: Redefining \. on input line 92.
-LaTeX Info: Redefining \% on input line 92.
+
+LaTeX Info: Redefining \. on input line 23.
+LaTeX Info: Redefining \% on input line 23.
 [1
 
-] (./sections/codigo_SDCMotor.tex
+]
+
+LaTeX Info: Redefining \. on input line 50.
+LaTeX Info: Redefining \% on input line 50.
+[2 <./img/diagramaGlobal.jpg>])
+
+LaTeX Info: Redefining \. on input line 89.
+LaTeX Info: Redefining \% on input line 89.
+[3] (./sections/codigo_SDCMotor.tex
 LaTeX Font Info:    Calculating math sizes for size <7.33339> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <7.33339> on input line 4.
@@ -2434,95 +2448,141 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 
 LaTeX Info: Redefining \. on input line 40.
 LaTeX Info: Redefining \% on input line 40.
-[2{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
+[4{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}]
 
-LaTeX Info: Redefining \. on input line 93.
-LaTeX Info: Redefining \% on input line 93.
-[3{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}]
+LaTeX Info: Redefining \. on input line 90.
+LaTeX Info: Redefining \% on input line 90.
+[5{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}]
 
-LaTeX Info: Redefining \. on input line 134.
-LaTeX Info: Redefining \% on input line 134.
-[4{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
+LaTeX Info: Redefining \. on input line 137.
+LaTeX Info: Redefining \% on input line 137.
+[6{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}]
 
-LaTeX Info: Redefining \. on input line 185.
-LaTeX Info: Redefining \% on input line 185.
-[5]
-<img/SDCMotor/SDCMotor_diagram.png, id=174, 956.07187pt x 1210.5225pt>
+LaTeX Info: Redefining \. on input line 183.
+LaTeX Info: Redefining \% on input line 183.
+[7]
+<img/SDCMotor/SDCMotor_diagram.png, id=212, 956.07187pt x 1210.5225pt>
 File: img/SDCMotor/SDCMotor_diagram.png Graphic file (type png)
 <use img/SDCMotor/SDCMotor_diagram.png>
-Package pdftex.def Info: img/SDCMotor/SDCMotor_diagram.png  used on input line 189.
+Package pdftex.def Info: img/SDCMotor/SDCMotor_diagram.png  used on input line 187.
 (pdftex.def)             Requested size: 328.82733pt x 416.33774pt.
 
 
-LaTeX Info: Redefining \. on input line 194.
-LaTeX Info: Redefining \% on input line 194.
-[6 <./img/SDCMotor/SDCMotor_diagram.png>])
+LaTeX Info: Redefining \. on input line 195.
+LaTeX Info: Redefining \% on input line 195.
+[8 <./img/SDCMotor/SDCMotor_diagram.png>])
 
-LaTeX Info: Redefining \. on input line 97.
-LaTeX Info: Redefining \% on input line 97.
-[7] (./sections/consideraciones_y_precauciones.tex
+LaTeX Info: Redefining \. on input line 94.
+LaTeX Info: Redefining \% on input line 94.
+[9] (./sections/consideraciones_y_precauciones.tex
 
-LaTeX Info: Redefining \. on input line 33.
-LaTeX Info: Redefining \% on input line 33.
-[8])
+LaTeX Info: Redefining \. on input line 31.
+LaTeX Info: Redefining \% on input line 31.
+[10])
 
-LaTeX Info: Redefining \. on input line 102.
-LaTeX Info: Redefining \% on input line 102.
-[9] (./sections/sensor_de_corriente.tex
-<img//SensorCorriente/sensorCorriente1.jpg, id=203, 590.205pt x 316.93407pt>
-File: img//SensorCorriente/sensorCorriente1.jpg Graphic file (type jpg)
-<use img//SensorCorriente/sensorCorriente1.jpg>
-Package pdftex.def Info: img//SensorCorriente/sensorCorriente1.jpg  used on input line 13.
-(pdftex.def)             Requested size: 352.31653pt x 189.1947pt.
-<img//SensorCorriente/senalArduino.jpg, id=205, 426.84468pt x 225.84375pt>
-File: img//SensorCorriente/senalArduino.jpg Graphic file (type jpg)
-<use img//SensorCorriente/senalArduino.jpg>
-Package pdftex.def Info: img//SensorCorriente/senalArduino.jpg  used on input line 23.
-(pdftex.def)             Requested size: 352.31653pt x 186.42331pt.
+LaTeX Info: Redefining \. on input line 104.
+LaTeX Info: Redefining \% on input line 104.
+[11] (./sections/solucion.tex
+<img//solucion/diagramaSol.jpg, id=242, 631.60968pt x 290.58563pt>
+File: img//solucion/diagramaSol.jpg Graphic file (type jpg)
+<use img//solucion/diagramaSol.jpg>
+Package pdftex.def Info: img//solucion/diagramaSol.jpg  used on input line 7.
+(pdftex.def)             Requested size: 328.82733pt x 151.28719pt.
+<img//solucion/diagramaCorriente.jpg, id=244, 669.2503pt x 349.305pt>
+File: img//solucion/diagramaCorriente.jpg Graphic file (type jpg)
+<use img//solucion/diagramaCorriente.jpg>
+Package pdftex.def Info: img//solucion/diagramaCorriente.jpg  used on input line 22.
+(pdftex.def)             Requested size: 328.82733pt x 171.62997pt.
 
 
-LaTeX Info: Redefining \. on input line 27.
-LaTeX Info: Redefining \% on input line 27.
-[10 <./img//SensorCorriente/sensorCorriente1.jpg>]
-<img//SensorCorriente/fuenteSim.jpg, id=214, 582.67688pt x 301.125pt>
-File: img//SensorCorriente/fuenteSim.jpg Graphic file (type jpg)
-<use img//SensorCorriente/fuenteSim.jpg>
-Package pdftex.def Info: img//SensorCorriente/fuenteSim.jpg  used on input line 32.
-(pdftex.def)             Requested size: 352.31653pt x 182.07779pt.
-<img//SensorCorriente/esquematico.jpg, id=216, 808.52063pt x 566.115pt>
-File: img//SensorCorriente/esquematico.jpg Graphic file (type jpg)
-<use img//SensorCorriente/esquematico.jpg>
-Package pdftex.def Info: img//SensorCorriente/esquematico.jpg  used on input line 41.
-(pdftex.def)             Requested size: 352.31653pt x 246.68994pt.
+LaTeX Info: Redefining \. on input line 26.
+LaTeX Info: Redefining \% on input line 26.
+[12 <./img//solucion/diagramaSol.jpg>]
+<img//solucion/sensor.jpg, id=252, 501.875pt x 501.875pt>
+File: img//solucion/sensor.jpg Graphic file (type jpg)
+<use img//solucion/sensor.jpg>
+Package pdftex.def Info: img//solucion/sensor.jpg  used on input line 31.
+(pdftex.def)             Requested size: 187.89928pt x 187.90399pt.
+<img//solucion/sensorCorriente1.jpg, id=253, 734.745pt x 451.6875pt>
+File: img//solucion/sensorCorriente1.jpg Graphic file (type jpg)
+<use img//solucion/sensorCorriente1.jpg>
+Package pdftex.def Info: img//solucion/sensorCorriente1.jpg  used on input line 40.
+(pdftex.def)             Requested size: 352.31653pt x 216.59387pt.
+
+
+LaTeX Info: Redefining \. on input line 44.
+LaTeX Info: Redefining \% on input line 44.
+[13 <./img//solucion/diagramaCorriente.jpg> <./img//solucion/sensor.jpg>]
+<img//solucion/conexionOPTO22.jpg, id=261, 682.04813pt x 255.95625pt>
+File: img//solucion/conexionOPTO22.jpg Graphic file (type jpg)
+<use img//solucion/conexionOPTO22.jpg>
+Package pdftex.def Info: img//solucion/conexionOPTO22.jpg  used on input line 59.
+(pdftex.def)             Requested size: 352.31653pt x 132.21535pt.
+<img//solucion/conexionOPTO22R.jpg, id=263, 770.88pt x 578.16pt>
+File: img//solucion/conexionOPTO22R.jpg Graphic file (type jpg)
+<use img//solucion/conexionOPTO22R.jpg>
+Package pdftex.def Info: img//solucion/conexionOPTO22R.jpg  used on input line 68.
+(pdftex.def)             Requested size: 187.89928pt x 140.92262pt.
+
+
+LaTeX Info: Redefining \. on input line 71.
+LaTeX Info: Redefining \% on input line 71.
+[14 <./img//solucion/sensorCorriente1.jpg> <./img//solucion/conexionOPTO22.jpg>]
+<img//solucion/CorrienteSimulinkSDCMotor.jpg, id=273, 456.95718pt x 288.3272pt>
+File: img//solucion/CorrienteSimulinkSDCMotor.jpg Graphic file (type jpg)
+<use img//solucion/CorrienteSimulinkSDCMotor.jpg>
+Package pdftex.def Info: img//solucion/CorrienteSimulinkSDCMotor.jpg  used on input line 79.
+(pdftex.def)             Requested size: 187.89928pt x 118.55806pt.
+<img//solucion/fuenteSim.jpg, id=277, 423.83344pt x 188.95593pt>
+File: img//solucion/fuenteSim.jpg Graphic file (type jpg)
+<use img//solucion/fuenteSim.jpg>
+Package pdftex.def Info: img//solucion/fuenteSim.jpg  used on input line 97.
+(pdftex.def)             Requested size: 352.31653pt x 157.07845pt.
+
+
+LaTeX Info: Redefining \. on input line 100.
+LaTeX Info: Redefining \% on input line 100.
+[15 <./img//solucion/conexionOPTO22R.jpg> <./img//solucion/CorrienteSimulinkSDCMotor.jpg>]
+<img//solucion/diagramaCargaElec.jpg, id=286, 590.205pt x 320.69812pt>
+File: img//solucion/diagramaCargaElec.jpg Graphic file (type jpg)
+<use img//solucion/diagramaCargaElec.jpg>
+Package pdftex.def Info: img//solucion/diagramaCargaElec.jpg  used on input line 113.
+(pdftex.def)             Requested size: 328.82733pt x 178.67464pt.
+<img//solucion/cargaElec.jpg, id=288, 551.81157pt x 357.58594pt>
+File: img//solucion/cargaElec.jpg Graphic file (type jpg)
+<use img//solucion/cargaElec.jpg>
+Package pdftex.def Info: img//solucion/cargaElec.jpg  used on input line 122.
+(pdftex.def)             Requested size: 352.31653pt x 228.31949pt.
+
+
+LaTeX Info: Redefining \. on input line 126.
+LaTeX Info: Redefining \% on input line 126.
+[16 <./img//solucion/fuenteSim.jpg> <./img//solucion/diagramaCargaElec.jpg>]
+
+LaTeX Info: Redefining \. on input line 157.
+LaTeX Info: Redefining \% on input line 157.
+[17 <./img//solucion/cargaElec.jpg>]
+<img//solucion/conexionOPTO22Carga.jpg, id=305, 682.04813pt x 255.95625pt>
+File: img//solucion/conexionOPTO22Carga.jpg Graphic file (type jpg)
+<use img//solucion/conexionOPTO22Carga.jpg>
+Package pdftex.def Info: img//solucion/conexionOPTO22Carga.jpg  used on input line 162.
+(pdftex.def)             Requested size: 328.82733pt x 123.40047pt.
+<img//solucion/conexionOPTO22RCarga.jpg, id=307, 770.88pt x 578.16pt>
+File: img//solucion/conexionOPTO22RCarga.jpg Graphic file (type jpg)
+<use img//solucion/conexionOPTO22RCarga.jpg>
+Package pdftex.def Info: img//solucion/conexionOPTO22RCarga.jpg  used on input line 171.
+(pdftex.def)             Requested size: 234.87769pt x 176.15768pt.
 )
 
-LaTeX Info: Redefining \. on input line 106.
-LaTeX Info: Redefining \% on input line 106.
-[11 <./img//SensorCorriente/senalArduino.jpg> <./img//SensorCorriente/fuenteSim.jpg>]
+LaTeX Info: Redefining \. on input line 111.
+LaTeX Info: Redefining \% on input line 111.
+[18 <./img//solucion/conexionOPTO22Carga.jpg> <./img//solucion/conexionOPTO22RCarga.jpg>] (./main.bbl)
 
-LaTeX Info: Redefining \. on input line 107.
-LaTeX Info: Redefining \% on input line 107.
-[12 <./img//SensorCorriente/esquematico.jpg>] (./sections/carga_electronica.tex
-<img//cargaElectronica/cargaElec.jpg, id=231, 452.4403pt x 228.855pt>
-File: img//cargaElectronica/cargaElec.jpg Graphic file (type jpg)
-<use img//cargaElectronica/cargaElec.jpg>
-Package pdftex.def Info: img//cargaElectronica/cargaElec.jpg  used on input line 11.
-(pdftex.def)             Requested size: 352.31653pt x 178.20935pt.
-
-
-LaTeX Info: Redefining \. on input line 34.
-LaTeX Info: Redefining \% on input line 34.
-[13 <./img//cargaElectronica/cargaElec.jpg>])
-
-LaTeX Info: Redefining \. on input line 112.
-LaTeX Info: Redefining \% on input line 112.
-[14] (./main.bbl)
-
-LaTeX Info: Redefining \. on input line 115.
-LaTeX Info: Redefining \% on input line 115.
+LaTeX Info: Redefining \. on input line 114.
+LaTeX Info: Redefining \% on input line 114.
 (c:/texlive/2025/texmf-dist/tex/generic/stringenc/se-utf8.def
 File: se-utf8.def 2019/11/29 v1.12 stringenc: UTF-8
-) [15] (./main.aux
+) [19] (./main.aux
 LaTeX Info: Redefining \. on input line 17.
 LaTeX Info: Redefining \% on input line 17.
 )
@@ -2532,18 +2592,18 @@ L3 programming layer <2025-05-26>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 34991 strings out of 467891
- 595162 string characters out of 5438296
- 1323805 words of memory out of 5000000
- 62755 multiletter control sequences out of 15000+600000
- 736038 words of font info for 137 fonts, out of 8000000 for 9000
+ 35075 strings out of 467891
+ 597324 string characters out of 5438296
+ 1324805 words of memory out of 5000000
+ 62823 multiletter control sequences out of 15000+600000
+ 739020 words of font info for 138 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 94i,16n,93p,17419b,2566s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmvtk10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmvtt10.pfb>
-Output written on main.pdf (18 pages, 714244 bytes).
+ 94i,16n,93p,17419b,2352s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmmi8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr17.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr6.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmr9.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmsy8.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmvtk10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/lm/lmvtt10.pfb>
+Output written on main.pdf (22 pages, 1610338 bytes).
 PDF statistics:
- 456 PDF objects out of 1000 (max. 8388607)
- 385 compressed objects within 4 object streams
- 77 named destinations out of 1000 (max. 500000)
- 346 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 550 PDF objects out of 1000 (max. 8388607)
+ 466 compressed objects within 5 object streams
+ 96 named destinations out of 1000 (max. 500000)
+ 426 words of extra memory for PDF output out of 10000 (max. 10000000)
 

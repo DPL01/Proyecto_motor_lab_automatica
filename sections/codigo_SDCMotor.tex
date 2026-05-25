@@ -1,15 +1,15 @@
 \subsection{Propósito y alcance}
-El archivo \texttt{SDCMotor.cpp} implementa una \emph{S-Function Level-2} para Simulink cuyo objetivo es actuar como puente entre el modelo de control y un módulo de E/S analógicas OPTO22 (vía Ethernet), utilizando la librería \texttt{O22SIOMM} (clase \texttt{O22SnapIoMemMap}). En cada paso de simulación el bloque:
+El archivo \texttt{SDCMotor.cpp} implementa una \emph{S-Function Level-2} para Simulink, cuyo objetivo es actuar como puente entre el modelo de control y un módulo de E/S analógicas OPTO22 mediante Ethernet. Para ello, utiliza la librería \texttt{O22SIOMM} y la clase \texttt{O22SnapIoMemMap}. En cada paso de simulación, el bloque:
 \begin{itemize}
-    \item \textbf{envía} al OPTO22 dos comandos analógicos: comando de voltaje para el actuador, y  una corriente de carga (\texttt{iLoad})\footnote{El significado físico exacto depende de la conexión real.};
-    \item \textbf{recibe} desde el OPTO22 dos mediciones analógicas:  velocidad (\texttt{velocidad}) y  corriente (\texttt{corriente});
+    \item \textbf{envía} al OPTO22 dos comandos analógicos: un comando de voltaje para el actuador y una corriente de carga (\texttt{iLoad})\footnote{El significado físico exacto depende de la conexión real.};
+    \item \textbf{recibe} desde el OPTO22 dos mediciones analógicas: velocidad (\texttt{velocidad}) y corriente (\texttt{corriente});
     \item \textbf{detiene} la simulación si se acumulan demasiados errores de comunicación.
 \end{itemize}
 
 
 
 \subsubsection{Red y configuración fija en el código}
-La S-Function abre la comunicación Ethernet con un \emph{Brain} OPTO22 en la IP \texttt{192.168.6.101} y puerto \texttt{2001}. Por lo tanto, el PC y el equipo OPTO22 deben estar en la misma red/subred y sin bloqueo por firewall/ACL. (Estos valores están embebidos en \texttt{SDCMotor.cpp}; si se cambia el setup, deben actualizarse en el código o parametrizarse.)
+La S-Function abre la comunicación Ethernet con un \emph{Brain} OPTO22 en la IP \texttt{192.168.6.101} y el puerto \texttt{2001}. Por lo tanto, el computador y el equipo OPTO22 deben estar en la misma red o subred, sin bloqueo por firewall o ACL. Estos valores están embebidos en \texttt{SDCMotor.cpp}; si se cambia el setup, deben actualizarse en el código o parametrizarse.
 
 \subsubsection{Requisitos de compilación (MEX/S-Function)}
 Para generar el binario \texttt{SDCMotor.mex*} se requiere:
@@ -17,10 +17,10 @@ Para generar el binario \texttt{SDCMotor.mex*} se requiere:
     \item \textbf{Un compilador C/C++ soportado por MATLAB} configurado con \texttt{mex -setup C++}.
     \item \textbf{Headers y librería} de OPTO22 (\texttt{O22SIOMM.h} y la correspondiente \texttt{.lib/.dll} o fuentes) disponibles en rutas conocidas.
 \end{itemize}
-MATLAB permite especificar rutas de \emph{include} con \texttt{-I} y enlazado con opciones de librería durante \texttt{mex}.
+MATLAB permite especificar rutas de \emph{include} con \texttt{-I} y opciones de enlazado durante la compilación con \texttt{mex}.
 
 \subsubsection{Compilación recomendada desde MATLAB}
-Desde la carpeta donde reside \texttt{SDCMotor.cpp}, compilar preferentemente con:
+Desde la carpeta donde reside \texttt{SDCMotor.cpp}, se recomienda compilar con:
 \begin{verbatim}
 mex -v SDCMotor.cpp ...
     -I"<RUTA_OPTO22>\include" ...
@@ -45,7 +45,7 @@ mex -v SDCMotor.cpp O22SIOMM.cpp -I"<RUTA_OPTO22>\include"
 #define S_FUNCTION_NAME  SDCMotor
 #define S_FUNCTION_LEVEL 2
 \end{verbatim}
-y se encapsula en \texttt{extern C} para asegurar \emph{linkage} compatible con el mecanismo de carga de Simulink.
+y se encapsula en \texttt{extern C} para asegurar un \emph{linkage} compatible con el mecanismo de carga de Simulink.
 
 \subsection{Parámetros del bloque}
 El bloque define \textbf{un (1) parámetro} de máscara:
@@ -55,7 +55,7 @@ El bloque define \textbf{un (1) parámetro} de máscara:
         T_s \leftarrow \texttt{mxGetScalar(ssGetSFcnParam(S,0))}
     \]
 \end{itemize}
-Si la cantidad de parámetros provistos en Simulink no coincide con lo esperado, \texttt{mdlInitializeSizes()} retorna y Simulink reporta el error.
+Si la cantidad de parámetros provistos en Simulink no coincide con lo esperado, \texttt{mdlInitializeSizes()} retorna y Simulink reporta el error correspondiente.
 
 \subsection{Interfaz de entradas y salidas}
 El bloque tiene \textbf{2 entradas escalares} y \textbf{2 salidas escalares}, todas tipo \texttt{real\_T}:
@@ -80,12 +80,12 @@ Salida 1 & $z$      & Corriente leída desde OPTO22 (canal analógico 6). \\
 \noindent Además, se exige memoria contigua para ambas entradas (\texttt{ssSetInputPortRequiredContiguous}), lo que simplifica el acceso a las señales.
 
 \subsection{Vectores de trabajo y estados}
-Para mantener información entre llamados, la S-Function reserva:
+Para mantener información entre llamadas, la S-Function reserva:
 \begin{itemize}
     \item \textbf{PWork (1 puntero):} almacena un puntero a la instancia \texttt{O22SnapIoMemMap} que representa la conexión activa con el OPTO22.
     \item \textbf{IWork (1 entero):} contador de errores de comunicación (\texttt{WORK\_INT\_ERROR\_COUNT}).
 \end{itemize}
-Se define además \textbf{1 estado discreto} (\texttt{ssSetNumDiscStates(S,1)}), aunque en esta implementación no se observa uso explícito de \texttt{ssGetX}/\texttt{ssSetX}; en la práctica, la memoria persistente relevante queda cubierta por \texttt{PWork} e \texttt{IWork}.
+Se define además \textbf{1 estado discreto} (\texttt{ssSetNumDiscStates(S,1)}), aunque en esta implementación no se observa uso explícito de \texttt{ssGetX}/\texttt{ssSetX}. En la práctica, la memoria persistente relevante queda cubierta por \texttt{PWork} e \texttt{IWork}.
 
 \subsection{Manejo de errores}
 El bloque implementa un mecanismo simple de tolerancia a fallos:
@@ -123,9 +123,7 @@ Se ejecuta una sola vez al inicio. Sus pasos son:
         \item Timeout: \texttt{10000} (ms)
         \item Último argumento: \texttt{1} (dependiente de la API; típicamente flags/modo).
     \end{itemize}
-    \item Espera a que la apertura finalice consultando \texttt{IsOpenDone()} mientras retorne 
-    
-    \texttt{SIOMM\_ERROR\_NOT\_CONNECTED\_YET}.
+    \item Espera a que la apertura finalice consultando \texttt{IsOpenDone()} mientras retorne \texttt{SIOMM\_ERROR\_NOT\_CONNECTED\_YET}.
     \item Si ocurre un error, define un estado de error fatal:
     \begin{center}
         \texttt{"Unable to connect to OPTO22 (192.168.6.101)."}
@@ -142,7 +140,7 @@ En cada paso de simulación, el bloque toma las entradas de Simulink y las enví
 Cada envío es verificado; ante error se incrementa el contador y, si se supera el umbral, se detiene la simulación.
 
 \paragraph{Nota.}
-El mensaje impreso ante error en el segundo envío repite el texto \texttt{Error sending voltage command.\textbackslash n}; si se quiere mayor trazabilidad, se puede diferenciar mensajes (p.ej. ``voltage'' vs ``load current'').
+El mensaje impreso ante error en el segundo envío repite el texto \texttt{Error sending voltage command.\textbackslash n}. Para mejorar la trazabilidad, se recomienda diferenciar los mensajes de error asociados al comando de voltaje y a la corriente de carga.
 
 \subsubsection{\texttt{mdlOutputs(S,tid)}: lectura de mediciones (entrada desde planta)}
 En cada paso, el bloque consulta dos valores analógicos:
@@ -157,7 +155,7 @@ Al terminar la simulación:
 \begin{enumerate}
     \item Recupera el objeto desde \texttt{PWork}.
     \item Envía \textbf{0.0} al canal analógico 0 (\texttt{SetAnaPtValue(0,0.0)}) como acción de seguridad para dejar el comando de voltaje en cero.
-    \item \hl{\textbf{AGREGAR: Brain->SetAnaPtValue(1,0.0); para cierre seguro del nuevo canal!!!!!!!}}
+    \item Se recomienda enviar \textbf{0.0} al canal analógico 1 (\texttt{SetAnaPtValue(1,0.0)}) para asegurar que el comando de carga también quede en cero al finalizar.
     \item Cierra la conexión (\texttt{Close()}).
     \item Libera memoria (\texttt{delete Brain}).
 \end{enumerate}
@@ -187,15 +185,15 @@ Terminate:
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{img/SDCMotor/SDCMotor_diagram.png}
-    \caption{Caption}
+    \caption{Diagrama funcional de la S-Function \texttt{SDCMotor}.}
     \label{fig:SDCMotor diagram}
 \end{figure}
 
 \subsection{Consideraciones de integración y configuración}
 \begin{itemize}
-    \item \hl{\textbf{IP de computador HOST:} \textbf{PONER ESAS COSAS DE LA IP DEL PC ESPECIAL}}
+    \item \textbf{IP del computador host:} el computador debe configurarse con una dirección compatible con la subred del OPTO22, evitando conflictos con otros adaptadores o redes activas.
     \item \textbf{IP fija en el código:} la dirección \texttt{192.168.6.101} está embebida. Para reutilización en distintas configuraciones de red, es recomendable parametrizar IP/puerto como parámetros del bloque.
-    \item \textbf{Entradas Analógicas adicionales:} En la configuración actual del setup, solo se ocupan 2 de los 4 puntos de entrada del modulo  \texttt{SNAP-AIV-4} \cite{opto22_snap_aiv4}, pero habilitar puntos adicionales puede incrementar el overhead y prohibir el uso de tiempos de muestreo menores.
+    \item \textbf{Entradas analógicas adicionales:} en la configuración actual del setup, solo se ocupan 2 de los 4 puntos de entrada del módulo \texttt{SNAP-AIV-4} \cite{opto22_snap_aiv4}. Habilitar puntos adicionales puede incrementar el \emph{overhead} de comunicación y dificultar el uso de tiempos de muestreo menores.
     \item \textbf{Mapa de canales:} los índices (0,1,4,6) asumen una asignación concreta de puntos analógicos en el OPTO22. Cualquier cambio de cableado/escala debe reflejarse en este mapa o, idealmente, parametrizarse.
     \item \textbf{Escalamiento físico:} este bloque transmite y recibe valores \texttt{float} sin aplicar conversión (p.ej., V$\leftrightarrow$RPM). Si se requiere trazabilidad metrológica, conviene documentar (y/o implementar) funciones de escala y saturación directamente en la simulación.
     \item \textbf{Robustez:} el umbral de errores (\texttt{MAX\_ERROR\_COUNT=5}) detiene la simulación. Esto es útil como medida de seguridad.
