@@ -1,6 +1,6 @@
 \section{Introducción}
 
-El propósito del presente informe es entregar una guía de apoyo para comprender como se realizó la modificación del montaje del motor de corriente continua. Anteriormente este contaba solamente con un motor de corriente continua y la única variable medida era la velocidad rotacional del eje del motor. Dada la necesidad de implementar un sistema de lazos anidados y además de aplicar una carga mecánica que ejerza torque al motor eléctrico, se implementó un sistema de medición de corriente para poder comunicar la corriente de armadura que consume el motor DC con el programa que realiza el control, se acopló mecánicamente un generador eléctrico, y, además, se implementó un módulo de carga electrónica que permite ser controlado desde el computador para aumentar o disminuir la carga del generador.\\
+El propósito del presente informe es entregar una guía de apoyo para comprender como se realizó la modificación del montaje del motor de corriente continua. Anteriormente este contaba solamente con un motor de corriente continua y la única variable medida era la velocidad rotacional del eje del motor. Dada la necesidad de implementar un sistema de lazos anidados y además de aplicar una carga mecánica que ejerza torque al motor eléctrico, se implementó un sistema de medición de corriente para poder comunicar la corriente de armadura que consume el motor DC con el programa que realiza el control, se acopló mecánicamente un generador eléctrico, y, además, se implementó un módulo de carga electrónica conectada a la armadura del generador que permite ser controlado desde el computador para aumentar o disminuir la carga del generador.\\
 
 En las siguientes secciones se deescribirá en detalle como se conforma el sistema completo, tanto a nivel físico como computacional, y también, como se implementaron todas las adiciones.\\
 
@@ -31,30 +31,71 @@ El módulo OPTO-22 corresponde a la interfaz principal entre el computador y el 
 Este dispositivo permite adquirir señales analógicas provenientes de sensores y, además, 
 generar señales analógicas de control hacia los actuadores del sistema.
 
-La comunicación entre el computador y el módulo OPTO-22 se realiza mediante protocolo Ethernet, 
+La comunicación entre el computador y el módulo OPTO-22 (ver Figura \ref{fig:OPTO22}) se realiza mediante protocolo Ethernet, 
 estableciendo una red directa entre ambos dispositivos. Desde Simulink se envían comandos de voltaje hacia el motor y la carga electrónica, 
 mientras que el OPTO-22 retorna las mediciones de velocidad y corriente para ser utilizadas posteriormentepor los algoritmos de control.
 
-En la implementación actual se utilizan los módulos SNAP-AOV-27 para las salidas analógicas y SNAP-AIV-4 para las entradas analógicas.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/OPTO22.jpg}
+    \caption{Vista del OPTO22}
+    \label{fig:OPTO22}
+\end{figure}
+
+
+En la implementación actual se utilizan los módulos SNAP-AOV-27 para las salidas analógicas y SNAP-AIV-4 para las entradas analógicas (ver Figura \ref{fig:snap}. Los rangos de voltaje que soportan ambos modulos son de -10 a 10 V de forma continua.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/snap.jpg}
+    \caption{Vista de los modulos de entradas y salidas analogicas SNAP-AIV-4 y SNAP-AOV-27 respectivamente}
+    \label{fig:snap}
+\end{figure}
+
+\subsubsection{Actuador de velocidad}
+
+El actuador de velocidad es el modulo mostrado en la siguiente Figura \ref{fig:ActV}. 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/ActV.jpg}
+    \caption{Vista del Actuador de velociad}
+    \label{fig:ActV}
+\end{figure}
+
+
+Dicho modulo recibe la señal de velocidad enviada desde Simulink mediante OPTO-22 a través del módulo de salidas analógicas SNAP-AOV-27, y, le aplica una amplificación de voltaje de un factor de aproximadamente 4, además, le agrega una etapa de potencia a la señal para ser aplicada a los bornes de la armadura del motor (lo cuál demanda un consumo de corriente). El funcionamiento interno del actuador se desconoce, pero se presume que puede ser un amplificador de voltaje seguido un amplificador de corriente para otorgar potencia al motor.
 
 \subsubsection{Sensor de velocidad}
 
-La velocidad angular del motor se mide mediante un sensor de velocidad basado en un encoder acoplado mecánicamente al eje del motor. 
-La señal generada por este sensor es acondicionada y posteriormente enviada al módulo OPTO-22 para ser digitalizada y procesada en Simulink.
+La velocidad angular del motor se mide mediante un sensor de velocidad basado en un disco con agujeros acoplado al eje del motor y un foto transistor acoplado opticamente con un diodo led infrarrojo los cuales al quedar alineados con un agujero del disco activan un 1 logico, lo que genera una señal con cierta frecuencia que permite determinar la velocidad rotacional del motor. Ver Figura \ref{fig:Encoder}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\linewidth]{img/Encoder.jpg}
+    \caption{Vista del Encoder}
+    \label{fig:Encoder}
+\end{figure}
+
+Dicha señal pulsante se envía al módulo que contiene al actuador de velocidad (ver Figura \ref{fig:ActV}), para ser transformada a un voltaje proporcional a la velocidad rotacional del eje mecánico del motor. Esta señal continua es enviada al módulo OPTO-22 mediante el módulo de entradas analógicas SNAP-AIV-4 para ser digitalizada y procesada en Simulink.
+
+NOTA: La cantidad de agujeros que posee el disco se desconoce, pues no es necesario ya que dicha labor se encuentra correctamente implementada. 
 
 \subsubsection{Sensor de corriente}
 
-Con el fin de medir la corriente de armadura consumida por el motor, se implementó una PCB dedicada basada en el sensor LA 55-P. 
+Con el fin de medir la corriente de armadura consumida por el motor, se implementó una PCB dedicada (más detalles en la seccion 'Solucion') basada en el sensor LA 55-P. 
 Este sensor permite realizar mediciones de corriente con aislamiento eléctrico y sin intervenir directamente el circuito de potencia.
 
-La señal entregada por el sensor es acondicionada mediante amplificadores operacionales y circuitos limitadores para obtener un rango compatible con las entradas analógicas del OPTO-22. \\
+La señal entregada por el sensor es acondicionada mediante amplificadores operacionales y circuitos limitadores para obtener un rango compatible con las entradas analógicas del OPTO-22. Por último, al igual que el sensor de velocidad, la señal de corriente es entregada como voltaje analógico al módulo SNAP-AIV-4. \\
 
 Nota: El módulo de medición de corriente también puede utilizarse para otros tipos de mediciones, por ejemplo, la corriente de campo del motor.
 
 \subsubsection{Carga electrónica}
-La carga electrónica fue diseñada con el propósito de aplicar una carga variable sobre el generador DC acoplado mecánicamente al motor. 
+La carga electrónica fue diseñada con el propósito de aplicar una carga variable sobre el generador DC acoplado mecánicamente al motor  (más detalles en la seccion 'Solucion'). 
 Esto permite simular distintas condiciones de carga y evaluar el comportamiento dinámico del sistema bajo diferentes exigencias. \\
 
-La carga es controlada mediante una señal analógica proveniente del OPTO-22, permitiendo variar la corriente consumida por el circuito de potencia.
+La carga es controlada mediante una señal analógica proveniente del OPTO-22 (salida desde el módulo SNAP-AOV-27), permitiendo variar la corriente consumida por el circuito de potencia.
 Internamente, la etapa de disipación utiliza un transistor TIP41C montado sobre un disipador térmico.
 

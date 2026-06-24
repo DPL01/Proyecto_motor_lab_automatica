@@ -49,7 +49,7 @@ Dicho voltaje de salida es una función de la corriente medida y sigue la relaci
 	\label{eq:Vsalida}
 \end{equation}
 
-Donde las resistencias R2 y R1 son fijas, mientras que R10 es variable y permite ajustar la ganancia de amplificacion, por otro lado, $K$ es una constante de transformacion que depende del sensor LA 55-P y que es desconocida, pero que gracias a la resistencia variable R10, es posible compensarla para que la señal $V_{salidaSensorCorriente}$ posea valores de amplitud entre 0 y 5 V en conjunto con la actuacion del limitador de corriente que no permite que la señal $V_{salidaSensorCorriente}$ sobrepase los 5 V pudiendo dañar las siguientes etapas.\\
+Donde las resistencias R2 y R1 son fijas, mientras que R10 es variable y permite ajustar la ganancia de amplificacion, por otro lado, $K$ es una constante de transformacion que depende del sensor LA 55-P y que es desconocida, pero que gracias a la resistencia variable R10, es posible compensarla para que la señal $V_{salidaSensorCorriente}$ posea valores de amplitud entre -5 y 5 V en conjunto con la actuacion del limitador de corriente que no permite que la señal $V_{salidaSensorCorriente}$ sobrepase los 5 V pudiendo dañar las siguientes etapas.\\
 
 %conexion a opto 22 puerto
 En cuanto a la conexión con el módulo Ethernet OPTO-22, esta señal de 2 cables (Señal y GND) se conecta a las borneras externas del módulo de entradas analógicas SNAP-AIV-4 (Modulo del OPTO-22)como se muestra a continuación (Figura \ref{fig:snapAivP}).
@@ -88,7 +88,13 @@ En la Figura \ref{fig:corrienteSimulink} se aprecia que la ganancia está establ
 	\label{eq:Kcompensacion}
 \end{equation}
 
-Donde \(K\) es la ganancia del sensor mencionada anteriormente. Este valor debe determinarse aplicando una corriente conocida en la entrada del sensor y observando el valor medido en Simulink para realizar el despeje correspondiente.\\
+Donde \(K\) es la ganancia del sensor mencionada anteriormente. Este valor debe determinarse aplicando una corriente conocida en la entrada del sensor y observando el valor medido en Simulink para realizar el despeje correspondiente. En la práctica, se utilizó un factor de compensanción K del siguente valor:\\
+
+\begin{equation}
+	K_{Real} = \frac{0.6}{1.33}
+	\label{eq:Kreal}
+\end{equation}
+
 
 Por último, para realizar las funciones de acondicionamiento de la señal de corriente, el circuito requiere una fuente de alimentación simétrica, como se muestra en la Figura \ref{fig:fSimetrica}. El voltaje de salida de la fuente es de \(\pm 12\) VDC.
 
