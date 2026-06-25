@@ -29,7 +29,7 @@ El sistema implementado está compuesto por distintos módulos electrónicos y c
 
 El módulo OPTO-22 corresponde a la interfaz principal entre el computador y el sistema físico. 
 Este dispositivo permite adquirir señales analógicas provenientes de sensores y, además, 
-generar señales analógicas de control hacia los actuadores del sistema.
+generar señales analógicas de control hacia los actuadores del sistema. Para realizar su funcion, requiere de una alimentacion de 5 Vdc.\\
 
 La comunicación entre el computador y el módulo OPTO-22 (ver Figura \ref{fig:OPTO22}) se realiza mediante protocolo Ethernet, 
 estableciendo una red directa entre ambos dispositivos. Desde Simulink se envían comandos de voltaje hacia el motor y la carga electrónica, 
@@ -53,20 +53,30 @@ En la implementación actual se utilizan los módulos SNAP-AOV-27 para las salid
     \label{fig:snap}
 \end{figure}
 
+NOTA: La alimentacion de 5 Vdc necesaria para alimentar el modulo OPTO-22 proviene del Actuador de velocidad.
+
 \subsubsection{Actuador de velocidad}
 
 El actuador de velocidad es el modulo mostrado en la siguiente Figura \ref{fig:ActV}. 
 
-
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.75\linewidth]{img/ActV.jpg}
-    \caption{Vista del Actuador de velociad}
+
+    \subfloat[Primera imagen.\label{fig:ActV1}]{
+        \includegraphics[width=0.5\textwidth]{img/ActV1.jpg}
+    }
+    \hfill
+    \subfloat[Segunda imagen.\label{fig:ActV2}]{
+        \includegraphics[width=0.5\textwidth]{img/ActV2.jpg}
+    }
+
+    \caption{Comparación entre ambas imágenes.}
     \label{fig:ActV}
 \end{figure}
 
-
 Dicho modulo recibe la señal de velocidad enviada desde Simulink mediante OPTO-22 a través del módulo de salidas analógicas SNAP-AOV-27, y, le aplica una amplificación de voltaje de un factor de aproximadamente 4, además, le agrega una etapa de potencia a la señal para ser aplicada a los bornes de la armadura del motor (lo cuál demanda un consumo de corriente). El funcionamiento interno del actuador se desconoce, pero se presume que puede ser un amplificador de voltaje seguido un amplificador de corriente para otorgar potencia al motor.
+
+NOTA: Este modulo se alimenta mediante una fuente de 50 Vdc.
 
 \subsubsection{Sensor de velocidad}
 
